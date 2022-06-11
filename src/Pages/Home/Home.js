@@ -10,30 +10,30 @@ import './Home.css';
 const Home = () => {
      // const [products, setProducts] = useProducts();
      const [cart, setCart] = useState([]);
-    //  const [pageCount,setPageCount]= useState(0);
-    //  const [page,setPage]= useState(0);
-    //  const [size,setSize]= useState(10);
+     const [pageCount,setPageCount]= useState(0);
+     const [page,setPage]= useState(0);
+     const [size,setSize]= useState(10);
  
      const [products, setProducts] = useState([]);
     //  ?page=${page}&size=${size}
  
      useEffect( () =>{
-         const url = `http://localhost:5000/product`;
+         const url = `http://localhost:5000/product?page=${page}&size=${size}`;
          // fetch('products.json')
          fetch(url)
          .then(res => res.json())
          .then(data => setProducts(data));
-     }, []);
+     }, [page,size]);
  
-    //  useEffect( ()=>{
-    //      fetch('http://localhost:5000/productCount')
-    //      .then(res=>res.json())
-    //      .then(data =>{
-    //          const count = data.count;
-    //          const pages = Math.ceil(count/10);
-    //          setPageCount(pages);
-    //      })
-    //  },[])
+     useEffect( ()=>{
+         fetch('http://localhost:5000/productCount')
+         .then(res=>res.json())
+         .then(data =>{
+             const count = data.count;
+             const pages = Math.ceil(count/10);
+             setPageCount(pages);
+         })
+     },[])
  
  
      useEffect( () =>{
@@ -78,7 +78,7 @@ const Home = () => {
                          handleAddToCart={handleAddToCart}
                          ></Product>)
                  }
-                 {/* <div className='pagination'>
+                 <div className='pagination'>
                  {
                      [...Array(pageCount).keys()].map(number => <button
                      className={page===number? 'selected' :''}
@@ -91,7 +91,7 @@ const Home = () => {
                      <option value="15">15</option>
                      <option value="20">20</option>
                  </select>
-             </div> */}
+             </div>
              </div>
              
              <div className="cart-container">
