@@ -69,7 +69,8 @@ const Home = () => {
      }
  
      return (
-         <div className='shop-container'>
+        <div>
+             <div className='shop-container'>
              <div className="products-container">
                  {
                      products.map(product=><Product 
@@ -78,20 +79,7 @@ const Home = () => {
                          handleAddToCart={handleAddToCart}
                          ></Product>)
                  }
-                 <div className='pagination'>
-                 {
-                     [...Array(pageCount).keys()].map(number => <button
-                     className={page===number? 'selected' :''}
-                     onClick={()=>setPage(number)}
-                     >{number + 1}</button>)
-                 }
-                 <select onChange={e=>setSize(e.target.value)}>
-                     <option value="5">5</option>
-                     <option value="10">10</option>
-                     <option value="15">15</option>
-                     <option value="20">20</option>
-                 </select>
-             </div>
+                
              </div>
              
              <div className="cart-container">
@@ -102,6 +90,21 @@ const Home = () => {
                  </Cart>
              </div>
          </div>
+         <div className='pagination'>
+                 {
+                     [...Array(pageCount).keys()].map(number => <button
+                     className={page===number? 'selected' :''}
+                     onClick={()=>setPage(number)}
+                     >{number + 1}</button>)
+                 }
+                 <select className='page' onChange={e=>setSize(e.target.value)}>
+                     <option value="5">5</option>
+                     <option value="10">10</option>
+                     <option value="15">15</option>
+                     <option value="20">20</option>
+                 </select>
+             </div>
+        </div>
      );
  };
 

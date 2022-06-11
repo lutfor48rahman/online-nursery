@@ -18,6 +18,11 @@
     border: 1px rgb(225, 96, 96) solid;
     border-radius: 5px;
 }
+.page{
+    border: 2px solid goldenrod;
+    border-radius: 5px;
+    background-color: bisque;
+}
 .pagination button{
     margin-right: 10px;
     background-color: rgb(234, 226, 226);
