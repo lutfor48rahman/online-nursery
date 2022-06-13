@@ -61,6 +61,7 @@ const Home = () => {
          else{
              const rest = cart.filter(product => product._id !== selectedProduct._id);
              exists.quantity = exists.quantity + 1;
+             exists.stock = exists.stock -1 ;
              newCart = [...rest, exists];
          }
          
@@ -85,7 +86,7 @@ const Home = () => {
              <div className="cart-container">
                  <Cart cart={cart}>
                      <Link to="/orders">
-                         <button>Review Order </button>
+                         <button className='cartButton'>Review Order </button>
                      </Link>
                  </Cart>
              </div>

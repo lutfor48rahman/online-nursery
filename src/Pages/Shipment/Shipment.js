@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
+import './Shipment.css';
 
 const Shipment = () => {
 
@@ -44,10 +45,10 @@ const Shipment = () => {
 
     }
     return (
-        // <div className='form-container'>
+        // <div className='form-control form-container'>
         //     <div>
         //         <h2 className='form-title'>Order Shipping</h2>
-        //         <form onSubmit={handleShipment}>
+        //         <form className='form-control' onSubmit={handleShipment}>
         //             <div className="input-group">
         //                 <label htmlFor="name">Your Name</label>
         //                 <input onBlur={handleNameBlur} type="text" name='name' required />
@@ -75,9 +76,18 @@ const Shipment = () => {
 
                 <div class="form-control w-full max-w-xs">
                     <label class="label">
-                        <span class="label-text">What is your name?</span>
+                        <span class="label-text">Address</span>
                     </label>
-                    <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+                    <input type="text" placeholder="Your address" class="input input-bordered w-full max-w-xs" />
+                    <label class="label">
+                        <span class="label-text">Email</span>
+                    </label>
+                    <input type="text" disabled value={user.email} placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+                    <label class="label">
+                        <span class="label-text">Phone</span>
+                    </label>
+                    <input type="text" placeholder="Phone number" class="input input-bordered w-full max-w-xs" /> <br />
+                    <input type="submit" value="SHIPPING" class="input input-bordered w-full max-w-xs submitButton" />
                 </div>
             </div>
         </div>

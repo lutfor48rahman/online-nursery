@@ -13,6 +13,12 @@
     background-color: rgba(255, 153, 0, 0.3);
 }
 
+.cartButton{
+    background-color: white;
+    padding: 3px;
+    border-radius: 5px;
+}
+
 .size{
     background-color: grey;
     border: 1px rgb(225, 96, 96) solid;
