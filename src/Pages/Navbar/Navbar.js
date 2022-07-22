@@ -18,7 +18,7 @@ const Navbar = () => {
         {/* <li className='btn btn-ghost normal-case text-xl text-purple-900'><Link to="/products">Products</Link></li> */}
         <li className='btn btn-ghost normal-case text-xl text-purple-900'><Link to="/dashboard">Dashboard</Link></li>
         <li className='btn btn-ghost normal-case text-xl text-purple-900'><Link to="/contact">Contact Us</Link></li>
-        <li>{user ? <button class="className='btn btn-ghost normal-case text-xl text-purple-900'" onClick={logout} >SIGN OUT</button>:<Link className='btn btn-ghost normal-case text-xl text-purple-900' to="/login">Login</Link>}</li>
+        <li>{user ? <button class="className='btn btn-ghost normal-case text-xl text-purple-900'" onClick={logout} >{`${user.displayName}    SIGN OUT`}</button>:<Link className='btn btn-ghost normal-case text-xl text-purple-900' to="/login">Login</Link>}</li>
     </>
     return (
         <div class="navbar bg-primary text-primary-content justify-sticky">

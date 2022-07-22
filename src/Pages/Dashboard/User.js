@@ -16,7 +16,6 @@ const User = () => {
     }
     return (
         <div>
-            <h2 className='text-2xl'>All users email</h2>
             <div class="divider">Email</div>
             <div class="overflow-x-auto">
   <table class="table w-full">

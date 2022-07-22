@@ -40,12 +40,36 @@ const Shipment = () => {
     const handleShipment = (event) => {
         event.preventDefault();
 
-        const shipping = { name, email, address, phone };
+        const shipping = { name, address, phone };
         alert(JSON.stringify(shipping));
 
     }
     return (
-        // <div className='form-control form-container'>
+
+        <div class="card w-96 bg-base-100 shadow-xl ">
+            <div class="card-body">
+                <form className='form-control' onSubmit={handleShipment}>
+                    <div class="form-control w-full max-w-xs">
+                    <label htmlFor="name">Your Name</label>
+                         <input class="input input-bordered w-full max-w-xs" onBlur={handleNameBlur} type="text" name='name' placeholder='Your name' required />
+                       <label htmlFor="address">Address</label>
+                        <input class="input input-bordered w-full max-w-xs" onBlur={handleAddressBlur} type="text" name='address' placeholder='Address' required />
+                        <label htmlFor="phone">Email</label>
+                        <input type="text" disabled value={user.email} placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+                        <label htmlFor="phone">Phone</label>
+                         <input class="input input-bordered w-full max-w-xs" onBlur={handlePhoneBlur} type="text" name='phone' placeholder='Phone number' required /> <br />
+                        <input type="submit" value="SHIPPING" class="input input-bordered w-full max-w-xs submitButton" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
+};
+
+export default Shipment;
+
+
+ // <div className='form-control form-container'>
         //     <div>
         //         <h2 className='form-title'>Order Shipping</h2>
         //         <form className='form-control' onSubmit={handleShipment}>
@@ -70,28 +94,3 @@ const Shipment = () => {
 
         //     </div>
         // </div>
-
-        <div class="card w-96 bg-base-100 shadow-xl ">
-            <div class="card-body">
-
-                <div class="form-control w-full max-w-xs">
-                    <label class="label">
-                        <span class="label-text">Address</span>
-                    </label>
-                    <input type="text" placeholder="Your address" class="input input-bordered w-full max-w-xs" />
-                    <label class="label">
-                        <span class="label-text">Email</span>
-                    </label>
-                    <input type="text" disabled value={user.email} placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-                    <label class="label">
-                        <span class="label-text">Phone</span>
-                    </label>
-                    <input type="text" placeholder="Phone number" class="input input-bordered w-full max-w-xs" /> <br />
-                    <input type="submit" value="SHIPPING" class="input input-bordered w-full max-w-xs submitButton" />
-                </div>
-            </div>
-        </div>
-    );
-};
-
-export default Shipment;

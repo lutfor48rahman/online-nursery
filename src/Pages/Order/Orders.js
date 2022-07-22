@@ -16,7 +16,6 @@ const Orders = () => {
         setCart(rest);
         removeFromDb(product._id);
     }
-
     
     return (
         <div className='shop-container'>

@@ -7,15 +7,14 @@ const UserRow = ({ user, isLoading, refetch }) => {
     if (isLoading) {
         return <Loading></Loading>
     }
-    console.log(user.email);
     const { _id, email, role } = user;
 
     const makeAdmin = () => {
         fetch(`http://localhost:5000/user/admin/${email}`, {
             method: 'PUT',
-            // headers: {
-            //     authorization: `Bearer ${localStorage.getItem('accessToken')}`
-            // },
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            },
         })
             .then(res => {
                 if (res.status === 403) {
@@ -24,8 +23,8 @@ const UserRow = ({ user, isLoading, refetch }) => {
                 return res.json()
             })
             .then(data => {
+                console.log(data);
                 if (data.modifiedCount > 0) {
-                    console.log(data);
                     refetch();
                     toast.success(`Make an Admin role`);
                 }

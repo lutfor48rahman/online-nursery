@@ -4,9 +4,16 @@ import React, { useState } from 'react';
 import './Review.css'; 
 
 const Review = (props) => {
-    console.log(props);
+    // console.log(props);
     const {product, handleRemoveProduct} = props;
     const {name, img, price, shipping, quantity} = product;
+
+    const [amount,setAmount] = useState(quantity);
+
+    const handleQuantity=(e)=>{
+        const number =parseInt( e.target.value) || 0;
+        setAmount(number);
+    }
     return (
         <div className='review-item'>
             <div>
@@ -17,9 +24,10 @@ const Review = (props) => {
                     <p className="product-name" title={name}>
                         { name.length > 20 ? name.slice(0, 20) + '...': name }
                     </p>
-                    <p>Price: <span className='orange-color'>${price}</span></p>
-                    <p><small>Shipping: ${shipping}</small></p>
-                    <p><small>Quantity: {quantity}</small></p>
+                    <p>Price: <span className='orange-color'>{price}</span></p>
+                    <p><small>Shipping: {shipping}</small></p>
+                    {/* <p><small>Quantity: {quantity}</small></p> */}
+                   <p>Quantity<input onChange={handleQuantity} type="text" value={amount} className='input input-bordered w-24 h-8 max-w-xs quantityButton' /></p>
                 </div>
                 <div className="delete-container">
                     <button onClick={() => handleRemoveProduct(product)} className='delete-button'>

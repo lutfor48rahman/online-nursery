@@ -38,3 +38,10 @@
     color: rgba(235, 87, 87, 1);
     font-size: 27px;
 }
+
+.quantityButton{
+    margin-left: 15px;
+}
+.pSpace{
+    margin-left: 100%;
+}
