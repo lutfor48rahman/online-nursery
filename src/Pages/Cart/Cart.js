@@ -3,7 +3,6 @@ import './Cart.css';
 
 const Cart = (props) => {
     const { cart } = props;
-    // console.log(props.children);
     let total = 0;
     let shipping = 0;
     let quantity = 0;
@@ -14,6 +13,8 @@ const Cart = (props) => {
     }
     const tax = parseFloat((total * 0.1).toFixed(2));
     const grandTotal = total + shipping + tax;
+    // <GrandTotal grandTotal={grandTotal}></GrandTotal>
+    // props.onData(grandTotal)
     return (
         <div className='cart'>
             <h4>Order Summary</h4>
