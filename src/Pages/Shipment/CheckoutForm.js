@@ -1,36 +1,41 @@
 import React from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import { async } from '@firebase/util';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
 const CheckoutForm = (props) => {
-    // console.log(props.grandTotal);
+    console.log(props.grandTotal);
     const {grandTotal} = props;
+    console.log(grandTotal);
 
     const [clientSecret,setClientSecret] = useState('');
     const [cardError, setCardError] = useState('');
+    const [success, setSuccess] = useState('');
     const stripe = useStripe();
     const element = useElements()
 
     useEffect(()=>{
+
+       if(grandTotal){
         fetch('http://localhost:5000/create-payment-intent',{
             method:'POST',
             headers:{
-                'content-type': 'application/json'
+                'content-type':'application/json'
             },
-            body:JSON.stringify(grandTotal)
+            body:JSON.stringify({grandTotal})
         })
         .then(res=>res.json())
         .then(data=>{
+            console.log(data);
             if(data?.clientSecret){
                 setClientSecret(data.clientSecret);
             }
         })
+       }
     },[grandTotal])
 
 
-    const handleSubmit = async (event) => {
+    const handleSubmit =async (event) => {
         event.preventDefault();
 
         if (!stripe || !element) {
@@ -49,6 +54,29 @@ const CheckoutForm = (props) => {
         });
 
         setCardError(error?.message || ' ');
+        setSuccess('');
+
+        // Payment confirm
+
+        const {paymentIntent, error:intentError} = await stripe.confirmCardPayment(
+           clientSecret,
+            {
+              payment_method: {
+                card: card,
+                billing_details: {
+                  name: 'Jenny Rosen',
+                },
+              },
+            },
+          );
+          if(intentError){
+            setCardError(intentError?.message);
+          }
+          else{
+            setCardError('');
+            console.log(paymentIntent);
+            setSuccess('Congrates ! Your payment is Complete!!');
+          }
 
     }
     return (
@@ -76,6 +104,10 @@ const CheckoutForm = (props) => {
             </form>
             {
                 cardError && <p className='text-red-500'>{cardError}</p>
+
+            }
+            {
+                success && <p className='text-green-500'>{success}</p>
 
             }
         </>

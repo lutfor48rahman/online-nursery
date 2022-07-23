@@ -25,7 +25,7 @@ const Shipment = () => {
     }
     const tax = parseFloat((total * 0.1).toFixed(2));
     const grandTotal = total + shipping + tax;
-    console.log(grandTotal);
+    // console.log(grandTotal);
 
     const stripePromise = loadStripe('pk_test_51LOBXRDFXCGEFnWMJW4PdvJSRNX5SWqvVqyktc9xw14cL0bR55adP5uG1kgNKty2z3pNUFcaR3qNrSKQoSnhmg0l00j1ixr0Y0');
 
@@ -49,9 +49,9 @@ const Shipment = () => {
     const handleNameBlur = (event) => {
         setName(event.target.value);
     }
-    // const handleEmailBlur = (event) =>{
-    //     setEmail(event.target.value);
-    // }
+    const handleEmailBlur = (event) =>{
+        setEmail(event.target.value);
+    }
 
     const handleAddressBlur = (event) => {
         setAddress(event.target.value);
@@ -64,7 +64,8 @@ const Shipment = () => {
     const handleShipment = (event) => {
         event.preventDefault();
 
-        const shipping = { name, address, phone };
+        const shipping = { name, email,address, phone };
+        const stringShipping = JSON.stringify(shipping);
         alert(JSON.stringify(shipping));
 
     }
@@ -75,14 +76,14 @@ const Shipment = () => {
                 <form className='form-control' onSubmit={handleShipment}>
                     <div class="form-control w-full max-w-xs">
                         <label htmlFor="name">Your Name</label>
-                        <input class="input input-bordered w-full max-w-xs" onBlur={handleNameBlur} type="text" name='name' placeholder='Your name' required />
+                        <input class="input input-bordered w-full max-w-xs" onMouseMove={handleNameBlur} type="text" name='name' value={user?.displayName} required />
                         <label htmlFor="address">Address</label>
-                        <input class="input input-bordered w-full max-w-xs" onBlur={handleAddressBlur} type="text" name='address' placeholder='Address' required />
+                        <input class="input input-bordered w-full max-w-xs" onChange={handleAddressBlur} type="text" name='address' placeholder='Address' required />
                         <label htmlFor="phone">Email</label>
-                        <input type="text" disabled value={user?.email} placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+                        <input onMouseMove={handleEmailBlur} type="email" name='email' value={user?.email} placeholder="Type here" class="input input-bordered w-full max-w-xs" />
                         <label htmlFor="phone">Phone</label>
-                        <input class="input input-bordered w-full max-w-xs" onBlur={handlePhoneBlur} type="text" name='phone' placeholder='Phone number' required /> <br />
-                        {/* <input type="submit" value="SHIPPING" class="input input-bordered w-full max-w-xs submitButton" /> */}
+                        <input class="input input-bordered w-full max-w-xs" onChange={handlePhoneBlur} type="text" name='phone' placeholder='Phone number' required /> <br />
+                        <input type="submit" value="SHIPPING" class="input input-bordered w-full max-w-xs submitButton" />
                         <p className='text-green-500 text-xl font-bold'>Total Amount : {grandTotal}</p>
                        
                     </div>
@@ -90,7 +91,9 @@ const Shipment = () => {
             </div>
             <div className='card-body'>
                 <Elements stripe={stripePromise}>
-                    <CheckoutForm grandTotal={grandTotal} />
+                    <CheckoutForm 
+                    grandTotal={grandTotal}
+                     />
                 </Elements>
             </div>
         </div>
@@ -98,30 +101,3 @@ const Shipment = () => {
 };
 
 export default Shipment;
-
-
- // <div className='form-control form-container'>
-        //     <div>
-        //         <h2 className='form-title'>Order Shipping</h2>
-        //         <form className='form-control' onSubmit={handleShipment}>
-        //             <div className="input-group">
-        //                 <label htmlFor="name">Your Name</label>
-        //                 <input onBlur={handleNameBlur} type="text" name='name' required />
-        //             </div>
-        //             <div className="input-group">
-        //                 <label htmlFor="email">Email</label>
-        //                 <input value={user?.email} readOnly type="email" name='email' required />
-        //             </div>
-        //             <div className="input-group">
-        //                 <label htmlFor="address">Address</label>
-        //                 <input onBlur={handleAddressBlur} type="text" name='address' required />
-        //             </div>
-        //             <div className="input-group">
-        //                 <label htmlFor="phone">Phone</label>
-        //                 <input onBlur={handlePhoneBlur} type="text" name='phone' required />
-        //             </div>
-        //             <input className='form-submit' type="submit" value="Add Shipping" />
-        //         </form>
-
-        //     </div>
-        // </div>
