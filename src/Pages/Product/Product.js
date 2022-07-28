@@ -13,7 +13,10 @@ const Product = ({product,handleAddToCart,handleQuantity}) => {
              <div className='product-info'>
                  <p className='product-name'>{name}</p>
                  <p>Price: {price}</p>
-                 <p>Stock:{stock}</p>
+                 {/* <p>Stock:{stock}</p> */}
+                 <p className='font-bold'>{
+                    stock >1 ?'Available':'StockOut'
+                 }</p>
                  <p><small>Description:{description.slice(0,80)}</small></p>
                  {/* <p><small>Description: {description.length>70?`${description.slice(0,70)}...read more`:description}</small></p> */}
              </div>

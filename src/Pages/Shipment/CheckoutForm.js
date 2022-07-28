@@ -4,9 +4,10 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 const CheckoutForm = (props) => {
-    console.log(props.grandTotal);
+
     const {grandTotal} = props;
-    console.log(grandTotal);
+    const {displayName,email} = props;
+    // console.log(displayName);
 
     const [clientSecret,setClientSecret] = useState('');
     const [cardError, setCardError] = useState('');
@@ -26,7 +27,7 @@ const CheckoutForm = (props) => {
         })
         .then(res=>res.json())
         .then(data=>{
-            console.log(data);
+            // console.log(data);
             if(data?.clientSecret){
                 setClientSecret(data.clientSecret);
             }
@@ -64,7 +65,8 @@ const CheckoutForm = (props) => {
               payment_method: {
                 card: card,
                 billing_details: {
-                  name: 'Jenny Rosen',
+                  name: displayName,
+                  email:email
                 },
               },
             },
@@ -98,7 +100,7 @@ const CheckoutForm = (props) => {
                         },
                     }}
                 />
-                <button className='btn btn-success btn-sm mt-4' type="submit" disabled={!stripe}>
+                <button className='btn btn-success btn-sm mt-4' type="submit" disabled={!stripe || !clientSecret}>
                     Pay
                 </button>
             </form>

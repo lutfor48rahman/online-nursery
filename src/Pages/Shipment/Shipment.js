@@ -65,7 +65,6 @@ const Shipment = () => {
         event.preventDefault();
 
         const shipping = { name, email,address, phone };
-        const stringShipping = JSON.stringify(shipping);
         alert(JSON.stringify(shipping));
 
     }
@@ -93,6 +92,7 @@ const Shipment = () => {
                 <Elements stripe={stripePromise}>
                     <CheckoutForm 
                     grandTotal={grandTotal}
+                    user={user}
                      />
                 </Elements>
             </div>
